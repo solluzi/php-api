@@ -2,10 +2,11 @@
 /**
  * 
  */
-namespace lib\controller;
+namespace core\lib\controller;
 
 abstract class Controller
 {
+    
     public function json($data)
     {
         header('Content-type: application/json');

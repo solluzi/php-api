@@ -8,10 +8,11 @@ declare(strict_types=1);
  */
 
 // Carrega o roteador
-require_once "lib/router/AltoRouter.php";
+require_once "core/lib/router/AltoRouter.php";
 
 // Autoload Composer
-require dirname(__DIR__) . '/vendor/autoload.php';
+
+require __DIR__ . '/vendor/autoload.php';
 
 // carregas as classes de todas as paginas
 spl_autoload_register( function ($className) {
@@ -24,7 +25,7 @@ spl_autoload_register( function ($className) {
         $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-
+    
     require $fileName;
 });
 
@@ -34,10 +35,10 @@ $router = new AltoRouter();
 $router->setBasePath('/v1');
 
 // Home
-$router->map( 'GET', '/',  'App\Controller\HomeController#index');
+$router->map( 'GET', '/',  'App\Controller\HomeController@index');
 
 $match = $router->match();
-list( $controller, $action ) = explode( '#', $match['target'] );
+list( $controller, $action ) = explode( '@', $match['target'] );
 
 if ( is_callable(array($controller, $action)) ) {
 
