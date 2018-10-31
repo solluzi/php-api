@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace util\general;
+namespace core\lib\util\general;
 
-class Date
+final class Date
 { 
 
     /**
@@ -31,6 +31,6 @@ class Date
         $dia = substr( $value, 0, 2 );
         $mes = substr( $value, 3, 2 );
         $ano = substr( $value, 6, 4 );
-        return "{$dia}/{$mes}/{$ano}";
+        return "{$ano}-{$mes}-{$dia}";
     }
 }

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace util\general;
+namespace core\lib\util\general;
 
-class CalculoPercentagem
+final class CalculoPercentagem
 {
     /**
      * Metodo de porcentagem: Quanto é X% de N?

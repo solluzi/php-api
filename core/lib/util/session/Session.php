@@ -1,9 +1,9 @@
 <?php
-namespace util\session;
+namespace core\lib\util\session;
 /**
  * 
  */
-class Session
+final class Session
 {
     public static function setValue($key, $value)
     {

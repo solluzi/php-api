@@ -7,7 +7,13 @@
            "App\\": "src/App" 
         },
         "files": [
-            "core/lib/util/validation/EmailValidator.php"
+            "core/lib/util/validation/EmailValidator.php",
+            "core/lib/util/general/CalculoPercentagem.php",
+            "core/lib/util/general/CEP.php",
+            "core/lib/util/general/CNPJ.php",
+            "core/lib/util/general/CPF.php",
+            "core/lib/util/general/Date.php",
+            "core/lib/util/general/NumberString.php"
         ]
     },
     "autoload-dev": {
