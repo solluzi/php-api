@@ -30,13 +30,15 @@ spl_autoload_register( function ($className) {
 });
 
 
-// Chama a rota
+########################## Instancia a Classe AltoRouter ##########
 $router = new AltoRouter();
 $router->setBasePath('/v1');
 
+########################## Rotas ##################################
 // Home
 $router->map( 'GET', '/',  'App\Controller\HomeController@index');
 
+######################### Valida as Rotas #########################
 $match = $router->match();
 list( $controller, $action ) = explode( '@', $match['target'] );
 
