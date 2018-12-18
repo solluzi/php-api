@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace core\lib\util\general;
 
+/**
+ * @author Name <email@email.com>
+ * @package category
+ * @license MIT
+ */
 final class CalculoPercentagem
 {
     /**
@@ -24,7 +29,7 @@ final class CalculoPercentagem
      * @param [type] $total
      * @return void
      */
-    public static function porcentagemNx( $valor, $total )
+    public static function porcentagemNx( $valor, $total ): void
     {
         return ( $valor * 100 ) / $total;
     }

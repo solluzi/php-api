@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @copyright 2018 Solluzi Soluções Integradas
  */
 
-// Carrega o roteador
+########################## Carrega o roteador ##########
 require_once "core/lib/router/AltoRouter.php";
 
-// Autoload Composer
+########################## Autoload Composer ##########
 
 require __DIR__ . '/vendor/autoload.php';
 
-// carregas as classes de todas as paginas
+########################## carregas as classes de todas as paginas ##########
 spl_autoload_register( function ($className) {
     $className = ltrim($className, '\\');
     $fileName  = '';
@@ -40,10 +40,9 @@ $router->map( 'GET', '/',  'App\Controller\HomeController@index');
 
 ######################### Valida as Rotas #########################
 $match = $router->match();
-list( $controller, $action ) = explode( '@', $match['target'] );
-
-if ( is_callable(array($controller, $action)) ) {
-
+if($match){
+    list( $controller, $action ) = explode( '@', $match['target'] );
+    is_callable(array($controller, $action));
     $obj = new $controller();
     call_user_func_array(array($obj,$action), array($match['params']));
 

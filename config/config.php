@@ -10,5 +10,6 @@ return [
         'host' => getenv(''),
         'type' => getenv(''),
         'port' => getenv('')
-    ]
+    ],
+    'crm'       => []
 ];
