@@ -6,6 +6,5 @@ class CPFValidation
 {
     public function __construct($value)
     {
-        
     }
 }

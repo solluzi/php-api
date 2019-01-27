@@ -7,7 +7,7 @@
  * classe Criteria
  *  Esta classe provê uma interface utilizada para definição de critérios
  */
-namespace ado;
+namespace Ado;
 
 use ado\Expression;
 
@@ -35,7 +35,7 @@ class Criteria extends Expression
     public function add(Expression $expression, $operator = self::AND_OPERATOR)
     {
         // na primeira vez, não precisamos de operador lógico para concatenar
-        if(empty($this->expressions)){
+        if (empty($this->expressions)) {
             $operator = null;
         }
 
@@ -54,8 +54,7 @@ class Criteria extends Expression
         if (is_array($this->expressions)) {
             if (count($this->expressions) > 0) {
                 $result = '';
-                foreach ($this->expressions as $i => $expression) 
-                {
+                foreach ($this->expressions as $i => $expression) {
                     $operator = $this->operators[$i];
                     // concatena o operador com a respectiva expressão
                     $result .= $operator . $expression->dump() . ' ';
@@ -76,8 +75,7 @@ class Criteria extends Expression
     {
         if (isset($value)) {
             $this->properties[$property] = $value;
-        }
-        else {
+        } else {
             $this->properties[$property] = null;
         }
     }

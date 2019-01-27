@@ -7,9 +7,9 @@
  * classe SqlSelect
  * Esta classe provê meios para manipulação de uma instrução de SELECT no banco de dados
  */
-namespace ado;
+namespace Ado;
 
-use ado\SqlInstruction;
+use Ado\SqlInstruction;
 
 final class SqlSelect extends SqlInstruction
 {
@@ -34,7 +34,7 @@ final class SqlSelect extends SqlInstruction
     {
         // monta a instrução de SELECT
         $this->sql = 'SELECT ';
-        // monta a string com os nomes das colunas 
+        // monta a string com os nomes das colunas
         $this->sql .= implode(',', $this->columns);
         // adiciona a clausula FROM o nome da tabela
         $this->sql .= ' FROM ' . $this->entity;
@@ -42,7 +42,7 @@ final class SqlSelect extends SqlInstruction
         // obtem a clausula FROM o nome da tabela
         if ($this->criteria) {
             $expression = $this->criteria->dump();
-            if($expression){
+            if ($expression) {
                 $this->sql .= ' WHERE ' . $expression;
             }
             // obtém as propriedades do critério

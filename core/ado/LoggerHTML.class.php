@@ -4,24 +4,24 @@
  * @package category
  * @license MIT
  * @copyright 2018 Name
- * 
+ *
  * classe LoggerHTML
  * implementa o algoritmo de LOG em HTML
  */
 
-namespace ado;
+namespace Ado;
 
-use ado\Logger;
+use Ado\Logger;
 
- class LoggerHTML extends Logger
- {
-     /**
-      * método write()
-      * escreve uma mensagem no arquivo de LOG
-      *
-      * @param $message = mensagem a ser escrita
-      * @return void
-      */
+class LoggerHTML extends Logger
+{
+    /**
+     * método write()
+     * escreve uma mensagem no arquivo de LOG
+     *
+     * @param $message = mensagem a ser escrita
+     * @return void
+     */
     public function write($message)
     {
         date_default_timezone_set('America/Sao_Paulo');
@@ -36,4 +36,4 @@ use ado\Logger;
         fwrite($handler, $text);
         fclose($handler);
     }
- }
+}

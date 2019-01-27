@@ -7,7 +7,7 @@
  * @license MIT
  * @copyright 2018 Name
  */
-namespace ado;
+namespace Ado;
 
 use ado\Expression;
 
@@ -45,8 +45,7 @@ class Filter extends Expression
         // caso seja um array
         if (is_array($value)) {
             // percorre os valores
-            foreach ($$value as $x) 
-            {
+            foreach ($$value as $x) {
                 // se for inteiro
                 if (is_integer($x)) {
                     $foo[] = $x;
@@ -75,9 +74,7 @@ class Filter extends Expression
         elseif (is_bool($value)) {
             // armazena TRUE ou FALSE
             $result = $value ? 'TRUE' : 'FALSE';
-        }
-
-        else {
+        } else {
             $result = $value;
         }
         // retorna o valor

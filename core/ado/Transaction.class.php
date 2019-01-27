@@ -7,9 +7,9 @@
  * classe Transaction
  * esta classe provê os métodos necessários para manipular a transação
  */
-namespace ado;
+namespace Ado;
 
-use ado\Connection;
+use Ado\Connection;
 
 final class Transaction
 {
@@ -22,7 +22,6 @@ final class Transaction
      */
     private function __construct()
     {
-
     }
 
     /**
@@ -96,7 +95,7 @@ final class Transaction
     public static function log($message)
     {
         // verifica se existe um logger
-        if(self::$logger){
+        if (self::$logger) {
             self::$logger->write($message);
         }
     }

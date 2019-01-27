@@ -7,7 +7,7 @@
  * classe Connection
  * gerencia conexões com bancos de dados através de arquivos de configuração.
  */
-namespace ado;
+namespace Ado;
 
 final class Connection
 {
@@ -17,7 +17,6 @@ final class Connection
      */
     private function __construct()
     {
-
     }
 
     /**
@@ -49,8 +48,7 @@ final class Connection
         $port = isset($db['port']) ? $db['port'] : null;
 
         // descobre qual o tipo (driver) de banco de dados a ser utilizado
-        switch($type)
-        {
+        switch ($type) {
             case 'pgsql':
                 $port = $port ? $port : '5432';
                 $conn = new \PDO("pgsql:dbname={$name}; user={$user}; password={$pass}; host=$host;port={$port}");

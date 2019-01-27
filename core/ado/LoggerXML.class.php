@@ -4,17 +4,17 @@
  * @package category
  * @license MIT
  * @copyright 2018 Name
- * 
+ *
  * classe LoggerXML
  * implementa o algoritmo de LOG em XML
  */
 
- namespace ado;
+ namespace Ado;
 
- use ado\Logger;
+use Ado\Logger;
 
- class LoggerXML extends Logger
- {
+class LoggerXML extends Logger
+{
     /**
      * método write()
      * escreve uma mensagem de arquivo de LOG
@@ -34,4 +34,4 @@
         fwrite($handler, $text);
         fclose($handler);
     }
- }
+}

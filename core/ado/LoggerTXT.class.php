@@ -4,14 +4,14 @@
  * @package category
  * @license MIT
  * @copyright 2018 Name
- * 
+ *
  * classe LoggerTXT
  * implementa o algoritmo de LOG em TXT
  */
 
-namespace ado;
+namespace Ado;
 
-use ado\Logger;
+use Ado\Logger;
 
 class LoggerTXT extends Logger
 {

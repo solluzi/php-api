@@ -6,7 +6,7 @@
  * @copyright 2018 Name
  */
 
-namespace ado;
+namespace Ado;
 
 abstract class Expression
 {

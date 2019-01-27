@@ -15,7 +15,7 @@ require_once "core/lib/router/AltoRouter.php";
 require __DIR__ . '/vendor/autoload.php';
 
 ########################## carregas as classes de todas as paginas ##########
-spl_autoload_register( function ($className) {
+spl_autoload_register(function ($className) {
     $className = ltrim($className, '\\');
     $fileName  = '';
     $namespace = '';
@@ -36,18 +36,17 @@ $router->setBasePath('/v1');
 
 ########################## Rotas ##################################
 // Home
-$router->map( 'GET', '/',  'App\Controller\HomeController@index');
+$router->map('GET', '', 'App\Controller\HomeController@index');
 
 ######################### Valida as Rotas #########################
 $match = $router->match();
-if($match){
-    list( $controller, $action ) = explode( '@', $match['target'] );
+if ($match) {
+    list($controller, $action) = explode('@', $match['target']);
     is_callable(array($controller, $action));
     $obj = new $controller();
     call_user_func_array(array($obj,$action), array($match['params']));
-
-} else if ($match['target']==''){
-    echo 'Error: Pagina não encontrada'; 
+} elseif ($match['target']=='') {
+    echo 'Error: Pagina não encontrada';
 } else {
-    echo 'Error: Não pode chamar '.$controller.'#'.$action; 
+    echo 'Error: Não pode chamar '.$controller.'#'.$action;
 }

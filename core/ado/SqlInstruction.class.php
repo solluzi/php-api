@@ -4,14 +4,14 @@
  * @package category
  * @license MIT
  * @copyright 2018 Name
- * 
+ *
  * classe SqlInstruction
  * Esta classe provê os métodos em comum entre todas as instruções
  * SQL ( SELECT, INSERT, DELETE e UPDATE )
  */
-namespace ado;
+namespace Ado;
 
-use ado\Criteria;
+use Ado\Criteria;
 
 abstract class SqlInstruction
 {
@@ -54,5 +54,5 @@ abstract class SqlInstruction
      * declarando-o como <abstract> obrigamos sua declaração nas classes filhas,
      * uma vez que seu comportamento será distinto em cada uma delas, configurando polimorfismo.
      */
-    abstract function getInstruction();
+    abstract public function getInstruction();
 }

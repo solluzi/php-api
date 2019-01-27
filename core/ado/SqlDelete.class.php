@@ -4,13 +4,13 @@
  * @package category
  * @license MIT
  * @copyright 2018 Name
- * 
+ *
  * classe SqlDelete
  * Esta classe prové meios para manipulação de uma instrução de DELETE no banco de dados
  */
-namespace ado;
+namespace Ado;
 
-use ado\SqlInstruction;
+use Ado\SqlInstruction;
 
 final class SqlDelete extends SqlInstruction
 {

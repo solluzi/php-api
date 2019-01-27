@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace core\lib\util\general;
+namespace General;
 
 /**
  * @author Name <email@email.com>
  * @package category
  * @license MIT
  */
-final class CalculoPercentagem
+final class Percentagem
 {
     /**
      * Metodo de porcentagem: Quanto é X% de N?
@@ -17,9 +17,9 @@ final class CalculoPercentagem
      * @param [type] $total
      * @return void
      */
-    public static function porcentagemXn( $porcentagem, $total )
+    public static function porcentagemXn($porcentagem, $total)
     {
-        return ( $porcentagem / 100 ) * $total;
+        return ($porcentagem / 100) * $total;
     }
 
     /**
@@ -29,9 +29,9 @@ final class CalculoPercentagem
      * @param [type] $total
      * @return void
      */
-    public static function porcentagemNx( $valor, $total ): void
+    public static function porcentagemNx($valor, $total) : float
     {
-        return ( $valor * 100 ) / $total;
+        return ($valor * 100) / $total;
     }
 
     /**
@@ -41,8 +41,8 @@ final class CalculoPercentagem
      * @param [type] $porcentagem
      * @return void
      */
-    public static function porcentagemNnx( $parcial, $porcentagem )
+    public static function porcentagemNnx($parcial, $porcentagem)
     {
-        return ( $parcial / $porcentagem ) * 100;
+        return ($parcial / $porcentagem) * 100;
     }
 }

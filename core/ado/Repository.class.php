@@ -3,12 +3,12 @@
  * classe Repository
  * esta classe provê os métodos necessários para manipular coleções de objetos.
  */
-namespace ado;
+namespace Ado;
 
-use ado\Criteria;
-use ado\SqlSelect;
-use ado\Transaction;
-use ado\SqlDelete;
+use Ado\Criteria;
+use Ado\SqlSelect;
+use Ado\Transaction;
+use Ado\SqlDelete;
 
 final class Repository
 {
@@ -40,7 +40,7 @@ final class Repository
         $sql->setCriteria($criteria);
 
         // Obtem transação ativa
-        if($conn = Transaction::get()){
+        if ($conn = Transaction::get()) {
             // registra mensagem de log
             Transaction::log($sql->getInstruction());
 
@@ -48,19 +48,17 @@ final class Repository
             $result = $conn->Query($sql->getInstruction());
             $results = [];
 
-            if($result){
+            if ($result) {
                 // percorre os resultados da consulta, retornando um objeto
-                while ($row = $result->fetchObject($this->class)) 
-                {
+                while ($row = $result->fetchObject($this->class)) {
                     // armazena no array $results;
                     $results[] = $row;
                 }
             }
             return $results;
-        }
-        else {
+        } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa!!");            
+            throw new Exception("Não há transação ativa!!");
         }
     }
 
@@ -87,10 +85,9 @@ final class Repository
             // executa a instrução de DELETE
             $result = $conn->exec($sql->getInstruction());
             return $result;
-        }
-        else {
+        } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa");            
+            throw new Exception("Não há transação ativa");
         }
     }
 
@@ -110,21 +107,19 @@ final class Repository
         $sql->setCriteria($criteria);
 
         // obtem transação ativa
-        if($conn = Transaction::get()){
+        if ($conn = Transaction::get()) {
             // registra mensagem de log
             Transaction::log($sql->getInstruction());
             // executa instrução de SELECT
             $result = $conn->Query($sql->getInstruction());
-            if($result){
+            if ($result) {
                 $row = $result->fetch();
             }
             // retorna o resultado
             return $row[0];
-        }
-        else{
+        } else {
             // se não tiver transação, retorna uma exceção
             throw new Exception("Não há transação ativa!!");
-            
         }
     }
 }

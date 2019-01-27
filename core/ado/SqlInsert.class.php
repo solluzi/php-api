@@ -1,8 +1,8 @@
 <?php
-namespace ado;
+namespace Ado;
 
-use ado\SqlInstruction;
-use ado\Criteria;
+use Ado\SqlInstruction;
+use Ado\Criteria;
 
 /**
  * @author Name <email@email.com>
@@ -23,22 +23,19 @@ final class SqlInsert extends SqlInstruction
     public function setRowData($column, $value)
     {
         // verifica se é um dado escalar (string, inteiro, ...)
-        if(is_scalar($value)){
+        if (is_scalar($value)) {
             if (is_string($value) and (!empty($value))) {
                 // adiciona \ em aspas
                 $value = addslashes($value);
                 // caso seja uma string
                 $this->columnValues[$column] = "'$value'";
-            }
-            elseif (is_bool($value)) {
+            } elseif (is_bool($value)) {
                 // caso seja boolean
                 $this->columnValues[$column] = $value ? 'TRUE' : 'FALSE';
-            }
-            elseif ($value!=='') {
+            } elseif ($value!=='') {
                 // caso seja outro tipo de dado
                 $this->columnValues[$column] = $value;
-            }
-            else {
+            } else {
                 // caso seja NULL
                 $this->columnValues[$column] = "NULL";
             }
@@ -52,7 +49,7 @@ final class SqlInsert extends SqlInstruction
     public function setCriteria(Criteria $criteria)
     {
         // lança o erro
-        throw new Exception("Cannot call setCriteria from " .  __CLASS__);        
+        throw new Exception("Cannot call setCriteria from " .  __CLASS__);
     }
 
     /**

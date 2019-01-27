@@ -1,21 +1,33 @@
 <?php
 declare(strict_types=1);
 
-namespace core\lib\util\general;
+namespace General;
+
+use General\CPF;
 
 final class CPF
 {
-    public static function pontuado( $value ) : string
+    public static function pontuado($value)
     {
-        $primeiro = substr( $value, 0, 3 );
-        $segundo  = substr( $value, 3, 3 );
-        $terceiro = substr( $value, 6, 3 );
-        $quarto   = substr( $value, 9, 2 );
+        $cpf = preg_replace('/[^0-9]/', '', $value);
+        
+        if (strlen($cpf) > 11 | strlen($cpf) < 11) {
+            return null;
+        }
+
+        $primeiro = substr($cpf, 0, 3);
+        $segundo  = substr($cpf, 3, 3);
+        $terceiro = substr($cpf, 6, 3);
+        $quarto   = substr($cpf, 9, 2);
         return "{$primeiro}.{$segundo}.{$terceiro}-{$quarto}";
     }
 
-    public static function naoPontuado( $value ) : string
+    public static function naoPontuado($value)
     {
-        return preg_replace('/[^0-9]/', '', $value);
+        $cpf = preg_replace('/[^0-9]/', '', $value);
+        if (strlen($cpf) > 11 | strlen($cpf) < 11) {
+            return null;
+        }
+        return $cpf;
     }
 }

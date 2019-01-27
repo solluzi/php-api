@@ -1,31 +1,36 @@
 <?php
-namespace core\lib\util\session;
+declare(strict_types=1);
+
+namespace Session;
+
 /**
- * 
+ *
  */
 final class Session
 {
-    public static function setValue($key, $value)
+    public function __construct()
     {
         session_start();
+    }
+
+    public static function setValue($key, $value)
+    {
         $_SESSION[$key] = $value;
     }
 
     public static function getValue($key)
     {
-        session_start();
         return $_SESSION[$key];
     }
 
-    public static function destroy()
+    public static function kill()
     {
-        session_start();
-        session_destroy();
-        unset( $_SESSION );
+        unset($_SESSION);
     }
 
     public static function clear($key)
     {
         unset($_SESSION[$key]);
+        return null;
     }
 }
