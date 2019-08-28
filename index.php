@@ -76,7 +76,6 @@ if ($match) {
     $obj = new $controller();
     call_user_func_array(array($obj, $action), array($match['params']));
 } else if ($match['target'] == '') {
-    echo 'ola';
     echo json_encode(['Error: Pagina não encontrada']);
 } else {
     $response = ['code' => '404'];
