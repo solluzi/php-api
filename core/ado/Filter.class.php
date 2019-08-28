@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 /**
  * classe Filter
  *  Esta classe provê uma interface para definição de filtros de seleção
@@ -7,9 +8,9 @@
  * @license MIT
  * @copyright 2018 Name
  */
-namespace Ado;
+namespace Db;
 
-use ado\Expression;
+use Db\Expression;
 
 class Filter extends Expression
 {
@@ -30,7 +31,7 @@ class Filter extends Expression
         $this->operator = $operator;
         // transforma o valor de acordo com certas regras
         // antes de atribuir a popriedade a $this->value
-        $this->value    = $this->transform($value);
+        $this->value = $this->transform($value);
     }
 
     /**
@@ -45,7 +46,7 @@ class Filter extends Expression
         // caso seja um array
         if (is_array($value)) {
             // percorre os valores
-            foreach ($$value as $x) {
+            foreach ($value as $x) {
                 // se for inteiro
                 if (is_integer($x)) {
                     $foo[] = $x;
@@ -57,7 +58,6 @@ class Filter extends Expression
             // converte o array em string separadas por ","
             $result = '(' . implode(',', $foo) . ')';
         }
-
         // caso seja uma string
         elseif (is_string($value)) {
             // adiciona aspas

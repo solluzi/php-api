@@ -1,4 +1,5 @@
 <?php
+declare (strict_types = 1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -9,9 +10,9 @@
  * implementa o algoritmo de LOG em XML
  */
 
- namespace Ado;
+namespace Db;
 
-use Ado\Logger;
+use Db\Logger;
 
 class LoggerXML extends Logger
 {
@@ -26,9 +27,9 @@ class LoggerXML extends Logger
         $time = date('Y-m-d H:i:s');
         // monta a string
         $text = "<log>\n";
-        $text.= "   <time>$time</time>\n";
-        $text.= "   <message>$message</message>\n";
-        $text.="</log>\n";
+        $text .= "   <time>$time</time>\n";
+        $text .= "   <message>$message</message>\n";
+        $text .= "</log>\n";
         // adiciona ao final do arquivo
         $handler = fopen($this->filename, 'a');
         fwrite($handler, $text);

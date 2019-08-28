@@ -1,7 +1,11 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace General;
+
+/**
+ * 
+ */
 
 final class CNPJ
 {
@@ -23,7 +27,7 @@ final class CNPJ
     public static function naoPontuado($value)
     {
         $cnpj = preg_replace('/[^0-9]/', '', $value);
-        if (strlen($cnpj) > 14 || strlen($cnpj) < 14):
+        if (strlen($cnpj) > 14 || strlen($cnpj) < 14) :
             return null;
         endif;
 

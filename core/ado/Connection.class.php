@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -7,7 +8,7 @@
  * classe Connection
  * gerencia conexões com bancos de dados através de arquivos de configuração.
  */
-namespace Ado;
+namespace Db;
 
 final class Connection
 {
@@ -25,19 +26,10 @@ final class Connection
      */
     public static function open($name)
     {
+        $conn = null;
         // busca o array de conceções
         $config = include "config/config.php";
-        $db     = $config[$name];
-
-        // verifica se existe o arquivo de configuração para este banco de dados
-        /*if (file_exists("config/{$name}.ini")) {
-            // lé o INI e retorna um array
-            $db = parse_ini_file("config/{$name}.ini");
-        }
-        else{
-            // se não existir, lança um erro
-            throw new \Exception("banco de dados '$name' não encontrado");
-        }*/
+        $db = $config[$name];
 
         // lé as informações contidas no arquivo
         $user = isset($db['user']) ? $db['user'] : null;
@@ -72,7 +64,7 @@ final class Connection
         }
 
         // define para que o PDO lance exceções na ocorrência de erros
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         // retorna o objeto instanciado
         return $conn;

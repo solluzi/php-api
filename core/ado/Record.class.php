@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @license MIT
@@ -10,15 +12,15 @@
  * recuperar objetos da base de dados ( Active Record )
  */
 
-namespace Ado;
+namespace Db;
 
-use Ado\SqlInsert;
-use Ado\SqlUpdate;
-use Ado\Criteria;
-use Ado\Filter;
-use Ado\Transaction;
-use Ado\SqlSelect;
-use Ado\SqlDelete;
+use Db\SqlInsert;
+use Db\SqlUpdate;
+use Db\Criteria;
+use Db\Filter;
+use Db\Transaction;
+use Db\SqlSelect;
+use Db\SqlDelete;
 
 abstract class Record
 {
@@ -57,9 +59,9 @@ abstract class Record
     public function __set($prop, $value)
     {
         // verifica se existe método set_<propriedade>
-        if (method_exists($this, 'set_'.$prop)) {
+        if (method_exists($this, 'set_' . $prop)) {
             // executa o metodo set_<propriedade>
-            call_user_func([$this, 'set_'.$prop], $value);
+            call_user_func([$this, 'set_' . $prop], $value);
         } else {
             if ($value === null) {
                 unset($this->data[$prop]);
@@ -77,8 +79,8 @@ abstract class Record
     public function __get($prop)
     {
         // verifica se existe método get_<propriedade>
-        if (method_exists($this, 'get_'.$prop)) {
-            return call_user_func([$this, 'get_'.$prop]);
+        if (method_exists($this, 'get_' . $prop)) {
+            return call_user_func([$this, 'get_' . $prop]);
         } else {
             // retorna o valor da propriedade
             if (isset($this->data[$prop])) {
@@ -128,7 +130,7 @@ abstract class Record
         if (empty($this->data['id']) or (!$this->load($this->id))) {
             // incrementa o ID
             if (empty($this->data['id'])) {
-                $this->id = $this->getLast() +1;
+                $this->id = $this->getLast() + 1;
             }
             // cria uma instrução de insert
             $sql = new SqlInsert;
@@ -176,7 +178,7 @@ abstract class Record
     public function load($id)
     {
         // instancia a instrução de SELECT
-        $sql = new SqlSelect;
+        $sql = new SqlSelect();
         $sql->setEntity($this->getEntity());
         $sql->addColumn('*');
 
@@ -198,7 +200,7 @@ abstract class Record
             return $object;
         } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa!!");
+            throw new \Exception("Não há transação ativa!!");
         }
     }
 
@@ -210,7 +212,7 @@ abstract class Record
     public function delete($id = null)
     {
         // o ID é o parametro ou a propriedade ID
-        $id = $id ? $id : null;
+        $id = $id ? $id : $this->id;
         // Instancia uma instrução DELETE
         $sql = new SqlDelete;
         $sql->setEntity($this->getEntity());
@@ -230,7 +232,7 @@ abstract class Record
             return $result;
         } else {
             // se não tiver transação, retorna uma exceção
-            throw new Exception("Não há transação ativa!!");
+            throw new \Exception("Não há transação ativa!!");
         }
     }
 

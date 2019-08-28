@@ -1,14 +1,17 @@
 <?php
+
+declare(strict_types=1);
 /**
  * classe Repository
  * esta classe provê os métodos necessários para manipular coleções de objetos.
  */
-namespace Ado;
 
-use Ado\Criteria;
-use Ado\SqlSelect;
-use Ado\Transaction;
-use Ado\SqlDelete;
+namespace Db;
+
+use Db\Criteria;
+use Db\SqlSelect;
+use Db\Transaction;
+use Db\SqlDelete;
 
 final class Repository
 {
@@ -35,7 +38,7 @@ final class Repository
         // instancia a instrução SELECT
         $sql = new SqlSelect;
         $sql->addColumn('*');
-        $sql->setEntity(constant($this->class.'::TABLENAME'));
+        $sql->setEntity($this->class::TABLENAME);
         //attribui o criterio passado como parametro
         $sql->setCriteria($criteria);
 
@@ -50,7 +53,7 @@ final class Repository
 
             if ($result) {
                 // percorre os resultados da consulta, retornando um objeto
-                while ($row = $result->fetchObject($this->class)) {
+                while ($row = $result->fetchObject()) {
                     // armazena no array $results;
                     $results[] = $row;
                 }
@@ -74,7 +77,7 @@ final class Repository
     {
         // instancia instrução de DELETE
         $sql = new SqlDelete;
-        $sql->setEntity(constant($this->class.'::TABLENAME'));
+        $sql->setEntity($this->class::TABLENAME);
         // atribui o criterio passado como parametro
         $sql->setCriteria($criteria);
 
@@ -99,10 +102,10 @@ final class Repository
      */
     public function count(Criteria $criteria)
     {
-        // instancia a instrução de SELECT
+
         $sql = new SqlSelect;
         $sql->addColumn('count(*)');
-        $sql->setEntity(constant($this->class.'::TABLENAME'));
+        $sql->setEntity($this->class::TABLENAME);
         // atribui o criterio passado como parametro
         $sql->setCriteria($criteria);
 

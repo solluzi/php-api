@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -9,7 +10,7 @@
  * Esta classe provê uma interface abstrata para definição de algoritmos de LOG
  */
 
- namespace Ado;
+ namespace Db;
 
 abstract class Logger
 {

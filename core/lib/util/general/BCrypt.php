@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace General;
 
@@ -43,7 +43,7 @@ final class BCrypt
      */
     public static function hash($string, $cost = null): string
     {
-        if (empty($cost)):
+        if (empty($cost)) :
             $cost = self::$_defaultCost;
         endif;
 
@@ -117,21 +117,21 @@ final class BCrypt
         $si = "!@#$%¨&*()_+="; // $si contem os símbolos
 
         $senha = null;
-        if ($maiusculas):
+        if ($maiusculas) :
             // se $maiusculas for "true", a variavel $ma é embaralhada e adicionadapara variavel $senha
             $senha .= str_shuffle($ma);
         endif;
 
-        if ($maiusculas):
+        if ($maiusculas) :
             $senha .= str_shuffle($mi);
         endif;
 
-        if ($numeros):
+        if ($numeros) :
             // se $numeros for "true", a variavel $nu é embaralhada e adicionada para variavel $senha
             $senha .= str_shuffle($nu);
         endif;
 
-        if ($simbolos):
+        if ($simbolos) :
             // se $simbolos for "true", a variavel $si é embaralhada e adicionada para a variavel $senha
             $senha .= str_shuffle($si);
         endif;

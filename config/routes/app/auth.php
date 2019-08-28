@@ -1,0 +1,11 @@
+<?php
+$router->map(
+    'GET|POST',
+    '/login',
+    'App\Middleware\Auth\Login@auth'
+);
+$router->map(
+    'GET',
+    '/logout',
+    'App\Middleware\Login\Login@logout'
+);

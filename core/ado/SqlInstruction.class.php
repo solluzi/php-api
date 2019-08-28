@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -9,9 +10,9 @@
  * Esta classe provê os métodos em comum entre todas as instruções
  * SQL ( SELECT, INSERT, DELETE e UPDATE )
  */
-namespace Ado;
+namespace Db;
 
-use Ado\Criteria;
+use Db\Criteria;
 
 abstract class SqlInstruction
 {

@@ -5,13 +5,13 @@
  * @package category
  * @copyright 2018 Name
  */
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace App\Controller;
 
-use Controller\Controller;
+use Controller\Middleware;
 
-class HomeController extends Controller
+class HomeController extends Middleware
 {
     public function index()
     {

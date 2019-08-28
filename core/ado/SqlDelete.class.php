@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -8,9 +9,9 @@
  * classe SqlDelete
  * Esta classe prové meios para manipulação de uma instrução de DELETE no banco de dados
  */
-namespace Ado;
+namespace Db;
 
-use Ado\SqlInstruction;
+use Db\SqlInstruction;
 
 final class SqlDelete extends SqlInstruction
 {

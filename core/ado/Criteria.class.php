@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -7,9 +8,9 @@
  * classe Criteria
  *  Esta classe provê uma interface utilizada para definição de critérios
  */
-namespace Ado;
+namespace Db;
 
-use ado\Expression;
+use Db\Expression;
 
 class Criteria extends Expression
 {
@@ -22,8 +23,8 @@ class Criteria extends Expression
      */
     public function __construct()
     {
-        $this->expressions  = [];
-        $this->operators    = [];
+        $this->expressions = [];
+        $this->operators = [];
     }
 
     /**
@@ -40,8 +41,8 @@ class Criteria extends Expression
         }
 
         // agrega o resultado da expressão à lista de expressões
-        $this->expressions[]    = $expression;
-        $this->operators[]      = $operator;
+        $this->expressions[] = $expression;
+        $this->operators[] = $operator;
     }
 
     /**
