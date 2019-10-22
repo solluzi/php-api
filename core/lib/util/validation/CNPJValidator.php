@@ -59,7 +59,7 @@ final class CNPJValidator
         $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
 
         // valida tamanho
-        if (strlen($cnpj) != 14):
+        if (strlen($cnpj) != 14) :
             throw new InvalidArgumentException(sprintf('"%" O CNPJ é invalido', $cnpj));
         endif;
 
@@ -71,7 +71,7 @@ final class CNPJValidator
 
         $resto = $soma % 11;
 
-        if ($cnpj{12} != ($resto < 2 ? 0 : 11 - $resto)):
+        if ($cnpj{12} != ($resto < 2 ? 0 : 11 - $resto)) :
             throw new InvalidArgumentException(sprintf('"%" O CNPJ é invalido', $cnpj));
         endif;
 

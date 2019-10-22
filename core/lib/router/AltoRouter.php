@@ -17,12 +17,12 @@ class AltoRouter
     /**
      * @var array Array of all routes (incl. named routes).
      */
-    protected $routes = array();
+    protected $routes = [];
 
     /**
      * @var array Array of all named routes.
      */
-    protected $namedRoutes = array();
+    protected $namedRoutes = [];
 
     /**
      * @var string Can be used to ignore leading part of the Request URL (if main file lives in subdirectory of host)
@@ -32,14 +32,14 @@ class AltoRouter
     /**
      * @var array Array of default match types (regex helpers)
      */
-    protected $matchTypes = array(
+    protected $matchTypes = [
         'i'  => '[0-9]++',
         'a'  => '[0-9A-Za-z]++',
         'h'  => '[0-9A-Fa-f]++',
         '*'  => '.+?',
         '**' => '.++',
         ''   => '[^/\.]++'
-    );
+    ];
 
     /**
       * Create router in one call from config.
@@ -48,13 +48,13 @@ class AltoRouter
       * @param string $basePath
       * @param array $matchTypes
       */
-    public function __construct($routes = array(), $basePath = '', $matchTypes = array())
+    public function __construct($routes = [], $basePath = '', $matchTypes = [])
     {
         $this->addRoutes($routes);
         $this->setBasePath($basePath);
         $this->addMatchTypes($matchTypes);
     }
-    
+
     /**
      * Retrieves all routes.
      * Useful if you want to process or display routes.
@@ -83,7 +83,7 @@ class AltoRouter
             throw new \Exception('Routes should be an array or an instance of Traversable');
         }
         foreach ($routes as $route) {
-            call_user_func_array(array($this, 'map'), $route);
+            call_user_func_array([$this, 'map'], $route);
         }
     }
 
@@ -117,7 +117,7 @@ class AltoRouter
      */
     public function map($method, $route, $target, $name = null)
     {
-        $this->routes[] = array($method, $route, $target, $name);
+        $this->routes[] = [$method, $route, $target, $name];
 
         if ($name) {
             if (isset($this->namedRoutes[$name])) {
@@ -140,7 +140,7 @@ class AltoRouter
      * @return string The URL of the route with named parameters in place.
      * @throws Exception
      */
-    public function generate($routeName, array $params = array())
+    public function generate($routeName, array $params = [])
     {
 
         // Check if named route exists
@@ -150,7 +150,7 @@ class AltoRouter
 
         // Replace named parameters
         $route = $this->namedRoutes[$routeName];
-        
+
         // prepend base path to route url again
         $url = $this->basePath . $route;
 
@@ -186,7 +186,7 @@ class AltoRouter
      */
     public function match($requestUrl = null, $requestMethod = null)
     {
-        $params = array();
+        $params = [];
         $match = false;
 
         // set Request Url if it isn't passed as parameter
@@ -245,11 +245,11 @@ class AltoRouter
                     }
                 }
 
-                return array(
+                return [
                     'target' => $target,
                     'params' => $params,
                     'name' => $name
-                );
+                ];
             }
         }
         return false;
@@ -273,7 +273,7 @@ class AltoRouter
                 }
 
                 $optional = $optional !== '' ? '?' : null;
-                
+
                 //Older versions of PCRE require the 'P' in (?P<named>)
                 $pattern = '(?:'
                         . ($pre !== '' ? $pre : null)

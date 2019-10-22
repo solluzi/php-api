@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -7,9 +8,9 @@
  * classe SqlSelect
  * Esta classe provê meios para manipulação de uma instrução de SELECT no banco de dados
  */
-namespace Ado;
+namespace Db;
 
-use Ado\SqlInstruction;
+use Db\SqlInstruction;
 
 final class SqlSelect extends SqlInstruction
 {
@@ -48,11 +49,12 @@ final class SqlSelect extends SqlInstruction
             // obtém as propriedades do critério
             $order = $this->criteria->getProperty('order');
             $limit = $this->criteria->getProperty('limit');
-            $offset= $this->criteria->getProperty('offset');
+            $offset = $this->criteria->getProperty('offset');
+            $direction = $this->criteria->getProperty('direction');
 
             // obtém a ordenação do SELECT
             if ($order) {
-                $this->sql .= ' ORDER BY ' . $order;
+                $this->sql .= ' ORDER BY ' . $order . ' ' . $direction;
             }
 
             if ($limit) {

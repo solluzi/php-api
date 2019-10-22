@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/|version|/phpunit.xsd"
+        backupGlobals="false"
+        backupStaticAttributes="false"
+        colors="true"
+        beStrictAboutTestsThatDoNotTestAnything="false">
+        
+    <testsuites>
+        <testsuite name="config-api">
+            <directory>test/AppTest/SystemUserTest.php</directory>
+            <directory>test/AppTest/CompanyTest.php</directory>
+            <directory>test/AppTest/NavigationTest.php</directory>
+            <directory>test/AppTest/RoleTest.php</directory>            
+            <directory>test/AppTest/PreferenceTest.php</directory> 
+        </testsuite>
+
+        <testsuite name="Util">
+            <directory>test/GeneralTest/</directory>
+            <directory>test/ValidateTest/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>           
+        </whitelist>
+    </filter>
+</phpunit>

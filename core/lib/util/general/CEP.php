@@ -1,11 +1,21 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
+
+/**
+ * 
+ */
 
 namespace General;
 
 final class CEP
 {
-    public static function pontuado($value) : string
+    /**
+     * Undocumented function
+     *
+     * @param string $value
+     * @return string
+     */
+    public static function pontuado($value): string
     {
         $cep = self::naoPontuado($value);
         if ($cep == null) :
@@ -17,6 +27,12 @@ final class CEP
         return "{$primeiro}-{$segundo}";
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param string $value
+     * @return void
+     */
     public static function naoPontuado($value)
     {
         $cep = preg_replace('/[^0-9]/', '', $value);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @package category
@@ -9,9 +10,9 @@
  * implementa o algoritmo de LOG em HTML
  */
 
-namespace Ado;
+namespace Db;
 
-use Ado\Logger;
+use Db\Logger;
 
 class LoggerHTML extends Logger
 {

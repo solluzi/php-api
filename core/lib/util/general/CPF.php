@@ -1,16 +1,17 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace General;
 
-use General\CPF;
-
+/**
+ * Undocumented class
+ */
 final class CPF
 {
     public static function pontuado($value)
     {
         $cpf = preg_replace('/[^0-9]/', '', $value);
-        
+
         if (strlen($cpf) > 11 | strlen($cpf) < 11) {
             return null;
         }

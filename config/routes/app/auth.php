@@ -1,0 +1,11 @@
+<?php
+$router->map(
+    'GET|POST',
+    '/login',
+    'App\Controller\LoginController@auth'
+);
+$router->map(
+    'GET',
+    '/logout',
+    'App\Controller\LoginController@logout'
+);

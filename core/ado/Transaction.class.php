@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * @author Name <email@email.com>
  * @license MIT
@@ -7,9 +9,10 @@
  * classe Transaction
  * esta classe provê os métodos necessários para manipular a transação
  */
-namespace Ado;
 
-use Ado\Connection;
+namespace Db;
+
+use Db\Connection;
 
 final class Transaction
 {
@@ -21,8 +24,7 @@ final class Transaction
      * Está declarado como private para impedir que se crie instancias de Transaction
      */
     private function __construct()
-    {
-    }
+    { }
 
     /**
      * método open()
@@ -45,7 +47,7 @@ final class Transaction
      * método get()
      * retorna a conexão ativa da transação
      */
-    public function get()
+    public static function get()
     {
         // retorna a conexão ativa
         return self::$conn;

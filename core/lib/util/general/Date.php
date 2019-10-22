@@ -1,8 +1,11 @@
 <?php
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace General;
 
+/**
+ * Undocumented class
+ */
 final class Date
 {
 
@@ -12,14 +15,14 @@ final class Date
      * @param [type] $value
      * @return string
      */
-    public static function date2br($value, $datetime = false) : string
+    public static function date2br($value, $datetime = false): string
     {
         $tratado = str_replace('/', '-', $value);
-        $data   = new \DateTime($tratado);
-        if ($datetime) :
+        $data = new \DateTime($tratado);
+        if ($datetime) {
             $result = $data->format('d/m/Y H:i:s');
-        return $result;
-        endif;
+            return $result;
+        }
 
         $result = $data->format('d/m/Y');
         return $result;
@@ -31,16 +34,16 @@ final class Date
      * @param [type] $value
      * @return string
      */
-    public static function date2us($value, $datetime = false) : string
+    public static function date2us($value, $datetime = false): string
     {
-        if ($datetime) :
-            $date = str_replace('/', '-', $value) ;
+        $date = str_replace('/', '-', $value);
         $data = new \DateTime($date);
-        $result = $data->format('Y-m-d H:i:s');
-        return $result;
-        endif;
-        
-        $result = date('Y-m-d', strtotime($value));
+        if ($datetime) {
+            $result = $data->format('Y-m-d H:i:s');
+            return $result;
+        }
+
+        $result = $data->format('Y-m-d');
         return $result;
     }
 }

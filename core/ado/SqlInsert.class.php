@@ -1,8 +1,9 @@
 <?php
-namespace Ado;
+declare(strict_types=1);
+namespace Db;
 
-use Ado\SqlInstruction;
-use Ado\Criteria;
+use Db\SqlInstruction;
+use Db\Criteria;
 
 /**
  * @author Name <email@email.com>

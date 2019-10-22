@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @author Name <email@email.com>
  * @license MIT
@@ -6,13 +7,13 @@
  * @copyright 2018 Name
  */
 
-namespace Ado;
+namespace Db;
 
 abstract class Expression
 {
     // operadores logicos
-    const AND_OPERATOR = 'AND';
-    const OR_OPERATOR  = 'OR';
+    const AND_OPERATOR = ' AND ';
+    const OR_OPERATOR = ' OR ';
 
     // marca metodo dump como obrigatório
     abstract public function dump();
