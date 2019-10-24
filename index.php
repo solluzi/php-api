@@ -46,24 +46,7 @@ $router->setBasePath('/v1');
 require_once 'config/routes/app/routes.php';
 
 ########################## Rotas APP ######################################
-/*require_once 'config/routes/app/signup.php';
-require_once 'config/routes/app/auth.php';       // Login
 require_once 'config/routes/app/home.php';       // Home
-require_once 'config/routes/app/permission.php'; // Permission
-require_once 'config/routes/app/role.php';       // Role
-require_once 'config/routes/app/user.php';       // User
-require_once 'config/routes/app/preference.php'; // Preference
-
-########################## Rotas Estoque ##################################
-require_once 'config/routes/estoque/departamento.php';  //departamento
-require_once 'config/routes/estoque/grupo.php';         //grupo
-require_once 'config/routes/estoque/unidade.php';       //unidade
-require_once 'config/routes/estoque/tipomovimento.php'; //tipomovimento
-require_once 'config/routes/estoque/localestoque.php';  //localestoque
-require_once 'config/routes/estoque/produto.php';       //produto
-require_once 'config/routes/estoque/estorno.php';       //estorno
-require_once 'config/routes/estoque/historico.php';       //historico*/
-
 
 ######################### Validação as Rotas ##############################
 header("Content-Type: application/json; charset=UTF-8");

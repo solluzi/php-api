@@ -1,9 +1,9 @@
 <?php
 /**
- * @author Name <email@email.com>
- * @license MIT
- * @package category
- * @copyright 2018 Name
+ * @author Mauro Miranda
+ * @license FEATS http://feats.com.br/license-mvc
+ * @package app
+ * @copyright 2019 Feats
  */
 declare (strict_types = 1);
 
@@ -13,6 +13,11 @@ use Controller\Middleware;
 
 class HomeController extends Middleware
 {
+    public function __construct()
+    {
+        //$this->isLogged();
+    }
+
     public function index()
     {
         $response             = [];
