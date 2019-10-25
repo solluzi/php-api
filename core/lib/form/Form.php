@@ -128,7 +128,7 @@ class Form implements IFormValidation
         }
     }
 
-    public function validate($oprions = [])
+    public function validate($options = [])
     {
         # code...
     }
