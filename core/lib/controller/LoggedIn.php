@@ -1,24 +1,12 @@
 <?php
-
+declare(strict_types = 1);
 namespace Controller;
 
 use Session\JWTWrapper;
 
-abstract class Middleware
+class LoggedIn
 {
     private $jwt;
-    public function json($data)
-    {
-        header('Content-type: application/json');
-        $resposta = json_encode($data, true);
-        echo $resposta;
-    }
-
-    public function formData()
-    {
-        $data = json_decode(file_get_contents("php://input"));
-        return $data;
-    }
 
     public function isLogged()
     {
@@ -33,8 +21,11 @@ abstract class Middleware
         }
     }
 
-    public function validate(array $options)
+    public function getUserId()
     {
-        # code...
+        $authorization = getallheaders();
+        list($jwt) = sscanf($authorization['Authorization'], 'Bearer %s');
+        $user = JWTWrapper::decode($jwt);
+        return $user->data->id;
     }
 }

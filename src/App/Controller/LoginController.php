@@ -14,16 +14,17 @@ use Db\Filter;
 use Db\Criteria;
 use Db\Repository;
 use Session\JWTWrapper;
-use Controller\Controller;
+use Controller\iMiddleware;
+use Controller\Request;
 use Validation\InputRequiredValidator;
 use Db\Transaction;
 use General\BCrypt;
 
-class LoginController extends Controller
+class LoginController implements iMiddleware
 {
-    public function auth()
+    public function handle()
     {
-        $data = $this->formData();
+        $data = new Request();
 
         try {
             // validação de campos
