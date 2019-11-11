@@ -23,18 +23,8 @@ class HomeController implements iMiddleware
     public function handle()
     {
         $form = new Form();
-        $validate = [
-            'teste' => [
-                'min' => 5, 
-                'max'=> 6
-            ],
-            'cpf'   => [
-                'required'  => true, 
-                'min' => 11, 
-                'max' => 11 
-            ]
-        ];
-        return $form->validate($validate);
+        $validation = ['teste' => ['min' => 10, 'max' => 11, 'required' => true]];
+        $form->validate($validation);
         $response             = [];
         $response['razao']    = "Solluzi::Soluções Integradas";
         $response['endereco'] = "Av. Presidente Kennedy, 2511, Sala 10";

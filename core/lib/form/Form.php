@@ -16,27 +16,27 @@ class Form implements IFormValidation
     protected $_validators = [
         "required" => [
             "handler" => "_required",
-            "message" => "O Campo {0} é obrigatório"
+            "message" => "Este Campo obrigatório"
         ],
         "alpha" => [
             "handler" => "_alpha",
-            "message" => "O Campo {0} só pode ter Letras"
+            "message" => "Este Campo deve ter Letras"
         ],
         "numeric" => [
             "handler" => "_numeric",
-            "message" => "O Campo {0} só pode ter números"
+            "message" => "Este Campo só deve números"
         ],
         "alphanumeric" => [
             "handler" => "_alphanumeric",
-            "message" => "O Campo {0} só pode conter letras e números"
+            "message" => "Este Campo deve conter letras e números"
         ],
         "max" => [
             "handler" => "_max",
-            "message" => "O Campo {0} só pode conter menos de {2} caracteres"
+            "message" => "Este Campodeve conter até %d caracteres"
         ],
-        "max" => [
+        "min" => [
             "handler" => "_min",
-            "message" => "O Campo {0} só pode conter mais de {2} caracteres"
+            "message" => "Este Campo deve conter acima de %d caracteres"
         ]
     ];
 
@@ -169,10 +169,11 @@ class Form implements IFormValidation
                 $this->v = $v;
                 $metodo = "_" . $k;
                 if(!$this->$metodo($request->getPost($chave))){
-                    $this->errors[$chave][] = 'Erro';
+                    $this->errors[$chave][] = ['message' => sprintf($this->_validators[$k]['message'], $v)];
                 }
             }
         }
+        
         if($this->errors){
             echo json_encode($this->errors);
             exit;

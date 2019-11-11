@@ -49,9 +49,9 @@ require_once 'config/routes/app/home.php';       // Home
 ######################### Validação as Rotas ##############################
 $match = $router->match();
 if ($match) {
-    $route = explode('@', $match['target']);
+    //$route = explode('@', $match['target']);
     list($controller, $action) = explode('@', $match['target']);
-    is_callable(array($controller, $action));
+    is_callable(array($controller, 'handle'));
     $obj = new $controller();
     call_user_func_array(array($obj, $action), array($match['params']));
 } else if ($match['target'] == '') {
