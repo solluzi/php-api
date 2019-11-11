@@ -4,10 +4,42 @@ declare(strict_types=1);
 
 namespace Form;
 
+use Controller\Request;
 use Interfaces\IFormValidation;
 
 class Form implements IFormValidation
 {
+    private $v;
+    /**
+     * @read
+     */
+    protected $_validators = [
+        "required" => [
+            "handler" => "_required",
+            "message" => "Este Campo obrigatório"
+        ],
+        "alpha" => [
+            "handler" => "_alpha",
+            "message" => "Este Campo deve ter Letras"
+        ],
+        "numeric" => [
+            "handler" => "_numeric",
+            "message" => "Este Campo só deve números"
+        ],
+        "alphanumeric" => [
+            "handler" => "_alphanumeric",
+            "message" => "Este Campo deve conter letras e números"
+        ],
+        "max" => [
+            "handler" => "_max",
+            "message" => "Este Campodeve conter até %d caracteres"
+        ],
+        "min" => [
+            "handler" => "_min",
+            "message" => "Este Campo deve conter acima de %d caracteres"
+        ]
+    ];
+
     protected $errors = [];
 
     public function _required($field)
@@ -30,14 +62,14 @@ class Form implements IFormValidation
         return preg_replace('/^([a-zA-Z0-9]+)', '', $field);
     }
 
-    public function _max($field, $number)
+    public function _max($field)
     {
-        return strlen($field) <= (int) $number;
+        return strlen($field) <= (int) $this->v;
     }
 
-    public function _min($field, $number)
+    public function _min($field)
     {
-        return strlen($field) >= (int) $number;
+        return strlen($field) >= (int) $this->v;
     }
 
     public function _phone($field)
@@ -128,8 +160,24 @@ class Form implements IFormValidation
         }
     }
 
-    public function validate($oprions = [])
+    public function validate($options = [])
     {
-        # code...
+        $request = new Request();
+        $this->errors = [];
+        foreach ($options as $chave => $valor) {
+            foreach ($valor as $k => $v) {
+                $this->v = $v;
+                $metodo = "_" . $k;
+                if(!$this->$metodo($request->getPost($chave))){
+                    $this->errors[$chave][] = ['message' => sprintf($this->_validators[$k]['message'], $v)];
+                }
+            }
+        }
+        
+        if($this->errors){
+            echo json_encode($this->errors);
+            exit;
+        }
+        return $this->errors;
     }
 }

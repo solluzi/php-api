@@ -1,23 +1,34 @@
 <?php
 /**
- * @author Name <email@email.com>
- * @license MIT
- * @package category
- * @copyright 2018 Name
+ * @author Mauro Miranda
+ * @license FEATS http://feats.com.br/license-mvc
+ * @package app
+ * @copyright 2019 Feats
  */
 declare (strict_types = 1);
 
 namespace App\Controller;
 
-use Controller\Middleware;
+use Controller\iMiddleware;
+use Controller\Response;
+use Form\Form;
 
-class HomeController extends Middleware
+class HomeController implements iMiddleware
 {
-    public function index()
+    public function __construct()
     {
+        //$this->isLogged();
+    }
+
+    public function handle()
+    {
+        $form = new Form();
+        $validation = ['teste' => ['min' => 10, 'max' => 11, 'required' => true]];
+        $form->validate($validation);
         $response             = [];
         $response['razao']    = "Solluzi::Soluções Integradas";
         $response['endereco'] = "Av. Presidente Kennedy, 2511, Sala 10";
-        return $this->json($response);
+        return Response::json($response, 200);
+        
     }
 }

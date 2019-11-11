@@ -284,3 +284,4 @@ class Exclusao extends Middleware
     }
 }
 ~~~~
+>>>>>>> master

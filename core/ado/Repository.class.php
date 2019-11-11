@@ -41,7 +41,7 @@ final class Repository
         $sql->setEntity($this->class::TABLENAME);
         //attribui o criterio passado como parametro
         $sql->setCriteria($criteria);
-
+        
         // Obtem transação ativa
         if ($conn = Transaction::get()) {
             // registra mensagem de log
@@ -58,6 +58,7 @@ final class Repository
                     $results[] = $row;
                 }
             }
+            
             return $results;
         } else {
             // se não tiver transação, retorna uma exceção

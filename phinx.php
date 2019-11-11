@@ -1,20 +1,41 @@
 <?php
-return [
+// Comando: vendor/bin/phinx create -c config/system.php MyNewMigration
+return
+[
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations/' . (isset($_SERVER['PHINX_DBFOLDER']) ? $_SERVER['PHINX_DBFOLDER'] : ''),
-        'seeds'      => '%%PHINX_CONFIG_DIR%%/db/seeds/' . (isset($_SERVER['PHINX_DBFOLDER']) ? $_SERVER['PHINX_DBFOLDER'] : ''),
+        'migrations' => './db/migrations/'.(isset($_SERVER['PHINX_DBNAME']) ? $_SERVER['PHINX_DBNAME'] : ''),
+        'seeds' => './db/seeds/'.(isset($_SERVER['PHINX_DBNAME']) ? $_SERVER['PHINX_DBNAME'] : '')
     ],
     'environments' => [
-        'default_migration_table'   => 'phinxlog',
-        'default_database'          => 'default',
-        'default' => [
-            'adapter' => isset($_SERVER['PHINX_DBADAPTER']) ? $_SERVER['PHINX_DBADAPTER']   : '',
-            'host'    => isset($_SERVER['PHINX_DBHOST'])    ? $_SERVER['PHINX_DBHOST']      : '',
-            'name'    => isset($_SERVER['PHINX_DBNAME'])    ? $_SERVER['PHINX_DBNAME']      : '',
-            'user'    => isset($_SERVER['PHINX_DBUSER'])    ? $_SERVER['PHINX_DBUSER']      : '',
-            'pass'    => isset($_SERVER['PHINX_DBPASS'])    ? $_SERVER['PHINX_DBPASS']      : '',
-            'port'    => isset($_SERVER['PHINX_DBPORT'])    ? $_SERVER['PHINX_DBPORT']      : '',
-            'charset' => isset($_SERVER['PHINX_DBCHARSET']) ? $_SERVER['PHINX_DBCHARSET']   : '',
+        'default_migration_table' => 'phinxlog',
+        'default_database' => 'development',
+        'production' => [
+            'adapter' => 'mysql',
+            'host' => 'localhost',
+            'name' => 'production_db',
+            'user' => 'root',
+            'pass' => '',
+            'port' => '3306',
+            'charset' => 'utf8',
         ],
+        'development' => [
+            'adapter' => 'mysql',
+            'host' => 'localhost',
+            'name' => 'development_db',
+            'user' => 'root',
+            'pass' => '',
+            'port' => '3306',
+            'charset' => 'utf8',
+        ],
+        'testing' => [
+            'adapter' => 'mysql',
+            'host' => 'localhost',
+            'name' => 'testing_db',
+            'user' => 'root',
+            'pass' => '',
+            'port' => '3306',
+            'charset' => 'utf8',
+        ]
     ],
+    'version_order' => 'creation'
 ];

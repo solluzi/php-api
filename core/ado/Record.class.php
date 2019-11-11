@@ -181,6 +181,7 @@ abstract class Record
         $sql = new SqlSelect();
         $sql->setEntity($this->getEntity());
         $sql->addColumn('*');
+        
 
         // cria criterio de seleção baseado no ID
         $criteria = new Criteria;
