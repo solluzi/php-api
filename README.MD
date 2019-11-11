@@ -3,8 +3,6 @@
 Solluzi framework é um framework desenvolvido com PHP e padrão de projetos. Este framework serve como API para todo o tipo de projeto, retornando os dados sempre em JSON. Neste framewolrk não 
 como fazer layout com HTML inbubtido no PHP ou Vice-Versa.
 
-
-
 ---
 
 ## Configuração de banco de dados
@@ -286,3 +284,4 @@ class Exclusao extends Middleware
     }
 }
 ~~~~
+>>>>>>> master
