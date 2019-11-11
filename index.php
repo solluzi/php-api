@@ -1,6 +1,4 @@
 <?php
-
-
 declare(strict_types=1);
 /**
  * @author Mauro Joaquim Miranda <mauro.miranda@solluzi.com.br>
@@ -8,6 +6,7 @@ declare(strict_types=1);
  * @package category
  * @copyright 2018 Solluzi Soluções Integradas
  */
+header("Content-Type: application/json; charset=UTF-8");
 header('Access-Control-Allow-Credentials:true');
 header("Access-Control-Allow-Origin: ".getenv('APP_URL'));
 header("Access-Control-Allow-Headers: token, Content-Type");
@@ -43,24 +42,20 @@ spl_autoload_register(function ($className) {
 ########################## Instancia a Classe AltoRouter ##################
 $router = new AltoRouter();
 $router->setBasePath('/v1');
-require_once 'config/routes/app/routes.php';
 
 ########################## Rotas APP ######################################
 require_once 'config/routes/app/home.php';       // Home
 
 ######################### Validação as Rotas ##############################
-header("Content-Type: application/json; charset=UTF-8");
-
 $match = $router->match();
 if ($match) {
-    $route = explode('@', $match['target']);
+    //$route = explode('@', $match['target']);
     list($controller, $action) = explode('@', $match['target']);
-    is_callable(array($controller, $action));
+    is_callable(array($controller, 'handle'));
     $obj = new $controller();
     call_user_func_array(array($obj, $action), array($match['params']));
 } else if ($match['target'] == '') {
-    echo json_encode(['Error: Pagina não encontrada']);
+    http_response_code(404);
 } else {
-    $response = ['code' => '404'];
-    echo json_encode($response);
+    http_response_code(404);
 }

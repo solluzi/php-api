@@ -1,6 +1,2 @@
 <?php
-$router->map(
-    'GET',
-    '/',
-    'App\Controller\HomeController@index'
-);
+$router->map('POST', '/', 'App\Controller\HomeController@handle');
