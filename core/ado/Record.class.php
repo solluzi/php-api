@@ -25,6 +25,7 @@ use Db\SqlDelete;
 abstract class Record
 {
     protected $data;   // array contendo os dados do objeto
+    private $primaryKey; // chave primária da tabela
 
     /**
      * método __construct()
@@ -40,6 +41,7 @@ abstract class Record
                 $this->fromArray($object->toArray());
             }
         }
+        $this->primaryKey = $this->getPrimaryKey();
     }
 
     /**
@@ -102,6 +104,18 @@ abstract class Record
     }
 
     /**
+     * método getPrimaryKey()
+     * retorna a chave primária da entidade (tabela)
+     */
+    private function getPrimaryKey()
+    {
+        // obtem o nome da classe
+        $class = get_class($this);
+        // retorna a constante classe TABLENAME
+        return constant("{$class}::PRIMARYKEY");
+    }
+
+    /**
      * método fromArray
      * preenche os dados do objeto com um array
      */
@@ -126,10 +140,13 @@ abstract class Record
      */
     public function store()
     {
+        // Instáncia a chave primária
+        $chavePrimaria = $this->primaryKey;
+
         // verifica se tem ID ou se existisse na base de dados
-        if (empty($this->data['id']) or (!$this->load($this->id))) {
+        if (empty($this->data[$chavePrimaria]) or (!$this->load($this->$chavePrimaria))) {
             // incrementa o ID
-            if (empty($this->data['id'])) {
+            if (empty($this->data[$chavePrimaria])) {
                 $this->id = $this->getLast() + 1;
             }
             // cria uma instrução de insert
@@ -146,11 +163,11 @@ abstract class Record
             $sql->setEntity($this->getEntity());
             // cria um criterio de seleção baseado no ID
             $criteria = new Criteria;
-            $criteria->add(new Filter('id', '=', $this->id));
+            $criteria->add(new Filter($chavePrimaria, '=', $this->$chavePrimaria));
             $sql->setCriteria($criteria);
             // percorre os dados do objeto
             foreach ($this->data as $key => $value) {
-                if ($key !== 'id') { // o ID não precisa ir no UPDATE
+                if ($key !== $chavePrimaria) { // o ID não precisa ir no UPDATE
                     // passa os dados do objeto para o SQL
                     $sql->setRowData($key, $this->$key);
                 }
@@ -177,6 +194,9 @@ abstract class Record
      */
     public function load($id)
     {
+        // Instancia a chave primária
+        $chavePrimaria = $this->getPrimaryKey();
+
         // instancia a instrução de SELECT
         $sql = new SqlSelect();
         $sql->setEntity($this->getEntity());
@@ -185,7 +205,7 @@ abstract class Record
 
         // cria criterio de seleção baseado no ID
         $criteria = new Criteria;
-        $criteria->add(new Filter('id', '=', $id));
+        $criteria->add(new Filter($chavePrimaria, '=', $id));
         // define o criterio de seleção de dados
         $sql->setCriteria($criteria);
         // obtem transação ativa
@@ -212,15 +232,18 @@ abstract class Record
      */
     public function delete($id = null)
     {
+        // Instancia a chave primária
+        $chavePrimaria = $this->getPrimaryKey();
+
         // o ID é o parametro ou a propriedade ID
-        $id = $id ? $id : $this->id;
+        $id = $id ? $id : $this->$chavePrimaria;
         // Instancia uma instrução DELETE
         $sql = new SqlDelete;
         $sql->setEntity($this->getEntity());
 
         // cria criterio de seleção de dados
         $criteria = new Criteria;
-        $criteria->add(new Filter('id', '=', $id));
+        $criteria->add(new Filter($chavePrimaria, '=', $id));
         // define o criterio de seleção baseado no ID
         $sql->setCriteria($criteria);
 
@@ -243,11 +266,14 @@ abstract class Record
      */
     private function getLast()
     {
+        // Instancia a chave primária
+        $chavePrimaria = $this->getPrimaryKey();
+
         // inicia transação
         if ($conn = Transaction::get()) {
             // instancia instrução de SELECT
             $sql = new SqlSelect;
-            $sql->addColumn('max(ID) as ID');
+            $sql->addColumn("max(${chavePrimaria}) as $chavePrimaria");
             $sql->setEntity($this->getEntity());
             // cria log e executa instrução SQL
             Transaction::log($sql->getInstruction());
