@@ -40,9 +40,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/App/AppTest",
-            "GeneralTest\\": "test/GeneralTest",
-            "ValidateTest\\": "test/ValidateTest"
+            "AppTest\\": "tests/App/AppTest",
+            "GeneralTest\\": "tests/GeneralTest"
         }
     }
 }
