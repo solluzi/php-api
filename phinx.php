@@ -7,8 +7,8 @@ return
         'seeds' => './db/seeds/'.(isset($_SERVER['PHINX_DBNAME']) ? $_SERVER['PHINX_DBNAME'] : '')
     ],
     'environments' => [
-        'default_migration_table' => 'phinxlog',
-        'default_database' => 'development',
+        'default_migration_table'   => 'phinxlog',
+        'default_database'          => 'development',
         'production' => [
             'adapter' => 'mysql',
             'host' => 'localhost',

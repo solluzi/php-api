@@ -1,0 +1,23 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: unit-testing
+  image: php:7.3-cli
+  commands:
+    - apt update
+    - apt install git -y
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install
+    - ./vendor/bin/phpunit --coverage-text tests/
+
+- name: cs-check
+  image: php:7.3-cli
+  commands:
+    - apt update
+    - apt install git -y
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install
+    - composer cs-check
